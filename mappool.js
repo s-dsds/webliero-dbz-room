@@ -1,23 +1,27 @@
 let mypool = new Map();
+let mypoolnames = new Set();
 let alreadychosen =  new Set();
 
 function addMap(name, data) {
+    if (!mypoolnames.has(name)) {
+        mypoolnames.add(name);
+    }
     mypool.set(name, _base64ToArrayBuffer(data));
 }
 
 function newrandommapindex() {	
-	if (alreadychosen.size>=(mypool.size)) {
+	if (alreadychosen.size>=(mypoolnames.size)) {
 		alreadychosen.clear();
 	}
 	do {
-		n = Math.floor(Math.random() * mypool.size);
+		n = Math.floor(Math.random() * mypoolnames.size);
 	} while (alreadychosen.has(n));	
 	alreadychosen.add(n);
 	return n;
 }
 
 function loadRandomMap() {
-    loadMap(mypool.keys().get(newrandommapindex()));	
+    loadMap(mypoolnames.get(newrandommapindex()));	
 }
 
 function loadMap(name) {
@@ -26,7 +30,7 @@ function loadMap(name) {
         window.WLROOM.loadPNGLevel(name, mypool.get(name));
     } else {
         notifyAdmins("trying to load invalid map name "+name);
-        notifyAdmins("available maps: "+JSON.stringify(mypool.keys()));
+        notifyAdmins("available maps: "+JSON.stringify(mypoolnames));
     }
 }
 
