@@ -22,7 +22,7 @@ var notifsRef;
 		levelPool: "rng",
 		respawnDelay: 3,
 		bonusDrops: "health",
-		teamsLocked: true,
+		teamsLocked: false,
 	});
 	window.WLROOM = room;
 
