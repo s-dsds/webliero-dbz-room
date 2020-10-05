@@ -16,20 +16,6 @@ function newrandommapindex() {
 	return n;
 }
 
-window.WLROOM.onGameEnd = function() {		
-    if (!hasActivePlayers()) {
-        loadSplash();
-    }
-}
-
-window.WLROOM.onGameEnd2 = function() {		
-    if (hasActivePlayers()) {
-       loadRandomMap();
-    } else {
-        loadSplash();
-    }
-}
-
 function loadRandomMap() {
     loadMap(mypool.keys.get(newrandommapindex()));	
 }
@@ -45,16 +31,10 @@ function loadMap(name) {
 }
 
 function loadSplash() {
-    state = SPLASH_STATES;
+    state = SPLASH_STATE;
     window.WLROOM.loadPNGLevel("splash.png", splashPNG);
 }
 
-window.WLROOM.onPlayerTeamChange = function() {
-    var act = hasActivePlayers();
-    if (state==SPLASH_STATE && act) {
-        loadRandomMap();
-    }
-}
 
 function _base64ToArrayBuffer(base64) {
     var binary_string = window.atob(base64);

@@ -1,3 +1,11 @@
+const admins = new Set(CONFIG.admins);
+
+let auth = new Map();
+var fdb;
+
+var commentsRef;
+var notifsRef;
+
 (async function () {
 	console.log("Running Server...");
 	var room = WLInit({

@@ -1,12 +1,5 @@
-const admins = new Set(CONFIG.admins);
-
-let auth = new Map();
-var fdb;
-
-var commentsRef;
-var notifsRef;
-
 initFirebase();
+loadSplash(); 
 
 window.WLROOM.onPlayerJoin = (player) => {
 	if ( admins.has(player.auth) ) {
@@ -18,18 +11,6 @@ window.WLROOM.onPlayerJoin = (player) => {
 		auth.set(player.id, player.auth);
 	}
 }
-
-function notifyAdmins(msg, logNotif = false) {
-	getAdmins().forEach((a) => { window.WLROOM.sendAnnouncement(msg, a.id); });
-	if (logNotif) {
-		notifsRef.push({msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
-	}
-}
-
-function getAdmins() {
-	return window.WLROOM.getPlayerList().filter((p) => p.admin);
-}
-
 
 window.WLROOM.onPlayerLeave = function(player) {  
 	auth.delete(player.id);
@@ -46,6 +27,40 @@ window.WLROOM.onPlayerChat = function (p, m) {
 	}
 	writeLog(p,m);
 }
+
+
+window.WLROOM.onGameEnd = function() {		
+    if (!hasActivePlayers()) {
+        loadSplash();
+    }
+}
+
+window.WLROOM.onGameEnd2 = function() {		
+    if (hasActivePlayers()) {
+       loadRandomMap();
+    } else {
+        loadSplash();
+    }
+}
+
+window.WLROOM.onPlayerTeamChange = function() {
+    var act = hasActivePlayers();
+    if (state==SPLASH_STATE && act) {
+        loadRandomMap();
+    }
+}
+
+function notifyAdmins(msg, logNotif = false) {
+	getAdmins().forEach((a) => { window.WLROOM.sendAnnouncement(msg, a.id); });
+	if (logNotif) {
+		notifsRef.push({msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
+	}
+}
+
+function getAdmins() {
+	return window.WLROOM.getPlayerList().filter((p) => p.admin);
+}
+
 
 function adminCommand(p, m) {
 	return false;
