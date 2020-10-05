@@ -17,7 +17,7 @@ function newrandommapindex() {
 }
 
 function loadRandomMap() {
-    loadMap(mypool.keys.get(newrandommapindex()));	
+    loadMap(mypool.keys().get(newrandommapindex()));	
 }
 
 function loadMap(name) {
@@ -26,7 +26,7 @@ function loadMap(name) {
         window.WLROOM.loadPNGLevel(name, mypool.get(name));
     } else {
         notifyAdmins("trying to load invalid map name "+name);
-        notifyAdmins("available maps: "+JSON.stringify(mypool.keys));
+        notifyAdmins("available maps: "+JSON.stringify(mypool.keys()));
     }
 }
 
