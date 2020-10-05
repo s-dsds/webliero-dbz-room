@@ -1,0 +1,23 @@
+(async function () {
+	console.log("Running Server...");
+	var room = WLInit({
+		token: window.WLTOKEN,
+		roomName: "DragonBall Z",
+		maxPlayers: 12,	
+		public: CONFIG.public
+	});
+
+	room.setSettings({
+		scoreLimit: 10,
+		timeLimit: 10,
+		gameMode: "dm",
+		levelPool: "rng",
+		respawnDelay: 3,
+		bonusDrops: "health",
+		teamsLocked: true,
+	});
+	window.WLROOM = room;
+
+	room.onRoomLink = (link) => console.log(link);
+	room.onCaptcha = () => console.log("Invalid token");
+})();
