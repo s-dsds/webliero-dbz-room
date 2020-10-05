@@ -21,7 +21,7 @@ function newrandommapindex() {
 }
 
 function loadRandomMap() {
-    loadMap(mypoolnames.get(newrandommapindex()));	
+    loadMap(mypoolnames.valueOf(newrandommapindex()));	
 }
 
 function loadMap(name) {
