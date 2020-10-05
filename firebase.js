@@ -37,8 +37,8 @@ function initFirebase() {
 		commentsRef = fdb.ref('dbz/comments');
 		notifsRef = fdb.ref('dbz/notifs');
 		console.log('firebase ok');
-		loadExistingUsers();
-		listenForUserEvents();
+		//loadExistingUsers();
+		//listenForUserEvents();
 	})();		
 }
 
