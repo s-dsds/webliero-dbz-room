@@ -92,5 +92,5 @@ function deleteUser(auth) {
  */
 
 function writeLog(p, msg) {
-   commentsRef.push({name: p.name, auth:auth.get(p.id), msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
+ //  commentsRef.push({name: p.name, auth:auth.get(p.id), msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
 }

@@ -1,4 +1,6 @@
 let palettes = new Map();
+var currPalette = "default";
+var paletteStart = 9;
 
 function invertPal(palette) {
     let invPal = new Map();
@@ -30,4 +32,23 @@ function addPalette(name, palette) {
 
 function getPalette(name) {
     return palettes.get(name);
+}
+
+function loadPalette(name) {
+    let sprites = loadPaletteToSprites(base_sprites, name);
+    loadMod(makeModZip(base_mod, sprites));
+}
+
+function loadPaletteToSprites(sprites, name) {
+    let colors = palettes.get(name);
+    let a = new Uint8Array(sprites);
+        colors.forEach(function (value, i) {
+
+        value.forEach(function (c, j) {
+            a[i*3+paletteStart+j]=c;			
+           // console.log(i*3+paletteStart+j);			
+        });
+		
+    });
+    return a.buffer;
 }

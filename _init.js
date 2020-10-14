@@ -1,4 +1,4 @@
-const admins = new Set(CONFIG.admins);
+let admins = new Set(CONFIG.admins);
 
 let auth = new Map();
 var fdb;

@@ -38,7 +38,11 @@ function loadRandomMap() {
 function loadMap(name) {
     if (mypool.has(name)) {
         currState = GAME_RUNNING_STATE;
-        window.WLROOM.loadPNGLevel(name, mypool.get(name));
+        map = mypool.get(name);
+        if (map.palette!= currPalette) {
+            loadPalette(map.palette);
+        }
+        window.WLROOM.loadPNGLevel(name, map.data);
     } else {
         notifyAdmins("trying to load invalid map name "+name);
         notifyAdmins("available maps: "+JSON.stringify(mypoolnames));

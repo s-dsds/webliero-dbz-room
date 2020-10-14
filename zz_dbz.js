@@ -2,7 +2,7 @@
 //loadSplash(); 
 
 window.WLROOM.onPlayerJoin = (player) => {
-	if ( admins.has(player.auth) ) {
+	if (admins.has(player.auth) ) {
 		window.WLROOM.setPlayerAdmin(player.id, true);
 	}
 	announce("Welcome to the DragonBall Z room!", player, 2550000, "bold");
@@ -23,9 +23,11 @@ window.WLROOM.onPlayerLeave = function(player) {
 window.WLROOM.onPlayerChat = function (p, m) {
 	console.log(p.name+" "+m);
 	if (m[0] == "!") {
-		if (/*p.admin && */adminCommand(p, m)) {
+		let splitted=m.substr(1).split(' ');
+		if ((p.admin && adminCommand(p, splitted)) 
+				||	(voteCommands(p, splitted))) {
 			return false;
-		} elseif (vo)
+		}
 	}
 	writeLog(p,m);
 }
@@ -61,7 +63,7 @@ function announce(msg, player, color, style) {
 function notifyAdmins(msg, logNotif = false) {
 	getAdmins().forEach((a) => { window.WLROOM.sendAnnouncement(msg, a.id); });
 	if (logNotif) {
-		notifsRef.push({msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
+		// notifsRef.push({msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
 	}
 }
 
@@ -70,9 +72,8 @@ function getAdmins() {
 }
 
 
-function adminCommand(p, m) {
-	const commandText = m.substr(1).split(" ");
-	console.log(`Command: ${commandText.join(" ")}`);
+function adminCommand(p, commandText) {
+	console.log(`Admin Command: ${commandText.join(" ")}`);
 	const command = adminCommands[commandText[0]];
 	if (command == null) {
 		console.log(`Unrecognized command: ${commandText[0]}`, p.id);

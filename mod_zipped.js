@@ -1,6 +1,4 @@
-var mdzip = new JSZip();
-
-mdzip.file('mod.json5',`{
+var base_mod = `{
     soundpack: "promode.zip",
     constants: {
       nrInitialLength: 250,
@@ -3795,8 +3793,4 @@ mdzip.file('mod.json5',`{
     ],
     textSpritesStartIdx: 240,
     crossHairSprite: 153
-  }`);
-
-mdzip.file('sprites.wlsprt', dsprites, {binary:true});
-loadMod(mdzip.generate({type:"arraybuffer"}));
-  
+  }`; 
