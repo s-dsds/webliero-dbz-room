@@ -6,6 +6,8 @@ var fdb;
 var commentsRef;
 var notifsRef;
 
+var commands;
+
 (async function () {
 	console.log("Running Server...");
 	var room = WLInit({

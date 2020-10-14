@@ -1,12 +1,12 @@
-initFirebase();
-loadSplash(); 
+//initFirebase();
+//loadSplash(); 
 
 window.WLROOM.onPlayerJoin = (player) => {
 	if ( admins.has(player.auth) ) {
 		window.WLROOM.setPlayerAdmin(player.id, true);
 	}
-	window.WLROOM.sendAnnouncement("Welcome to the DragonBall Z room!", player.id, 2550000, "bold", 1);
-	window.WLROOM.sendAnnouncement("please join us on discord if you're not there yet! "+CONFIG.discord_invite, player.id, 2550000, "italic", 1);
+	announce("Welcome to the DragonBall Z room!", player, 2550000, "bold");
+	announce("please join us on discord if you're not there yet! "+CONFIG.discord_invite, player, 2550000, "italic");
 	if (player.auth){		
 		auth.set(player.id, player.auth);
 	}
@@ -22,8 +22,10 @@ window.WLROOM.onPlayerLeave = function(player) {
 
 window.WLROOM.onPlayerChat = function (p, m) {
 	console.log(p.name+" "+m);
-	if (p.admin && adminCommand(p, m)) {
-		return false;
+	if (m[0] == "!") {
+		if (/*p.admin && */adminCommand(p, m)) {
+			return false;
+		} elseif (vo)
 	}
 	writeLog(p,m);
 }
@@ -44,12 +46,18 @@ window.WLROOM.onGameEnd2 = function() {
 }
 
 window.WLROOM.onPlayerTeamChange = function() {
-    var act = hasActivePlayers();
+	var act = hasActivePlayers();
+	console.log(arguments);
+	console.log(act);
+	console.log(state);
+	console.log(state==SPLASH_STATE);
     if (state==SPLASH_STATE && act) {
         loadRandomMap();
     }
 }
-
+function announce(msg, player, color, style) {
+	window.WLROOM.sendAnnouncement(msg, player.id, color!=null?color:25, style !=null?style:"", 1);
+}
 function notifyAdmins(msg, logNotif = false) {
 	getAdmins().forEach((a) => { window.WLROOM.sendAnnouncement(msg, a.id); });
 	if (logNotif) {
@@ -63,7 +71,26 @@ function getAdmins() {
 
 
 function adminCommand(p, m) {
-	return false;
+	const commandText = m.substr(1).split(" ");
+	console.log(`Command: ${commandText.join(" ")}`);
+	const command = adminCommands[commandText[0]];
+	if (command == null) {
+		console.log(`Unrecognized command: ${commandText[0]}`, p.id);
+		return false;
+	} else {
+		try {
+			command(p, commandText.splice(1));
+		}
+		catch (e) {
+			if (e instanceof Error) {
+				console.log(e);
+				notifyAdmins(`Error: ${e.message}`);
+			}
+			else {
+				notifyAdmins(`Unknown Error!`);
+			}
+		}
+	}
 	return true;
 }
 
