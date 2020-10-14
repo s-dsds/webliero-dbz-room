@@ -5,7 +5,7 @@ var voteCommands = {
     {   
         if (currentVote!=null) {
             currentVote.addYes(p);
-            announce("your vote has been taken into account");
+            announce("your vote has been taken into account", p);
             return;
         }
     },
@@ -16,9 +16,31 @@ var voteCommands = {
             return;
         }
     },
-    loadmap: function(p, mapname)
+    map: function(p, mapname)
     {
-        console.log(arguments);
-        loadMap(mapname[0]);
+        console.log(mapname);
+        //loadMap(mapname[0]);
+    },
+    help: function(p, commandName)
+    {        
+        if (name==null || name=='') {
+            announce("general commands: '!help' '!map'", p);
+            if (currentVote!=null) {
+                announce("votes possible: '!yes' '!no'", p);
+            }
+            if (p.admin) {
+                announce("admin commands: '!map'", p);
+            }
+        } else {
+            const name = commandName[0][0]=="!"?commandName[0].substr("!"):commandName[0];
+            const existCommands = commandHelp[name];
+            if (existCommands!=null) {
+                existCommands(p);
+            } else {
+                announce("unrecognised command '"+name+"'", p);
+            }
+            
+        }
+        
     }
 };

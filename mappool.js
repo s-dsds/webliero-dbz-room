@@ -14,6 +14,21 @@ function addMap(name, data, palette = null) {
     });
 }
 
+function addMapVariation(orig, name, data, palette = null) {
+    if (!mypoolnames.has(orig)) {
+        console.log("adding variation "+orig+" ignored, original map "+name+"does not exist");
+    }
+    let o = mypool.get(orig);
+    if (typeof o.variations === 'undefined') {
+        o.variations = new Map();
+    }
+    o.variations.set(name, {
+        name: orig+"_("+name+")",
+        data:_base64ToArrayBuffer(data),
+        palette: (palette != null && palette!='')?palette:o.palette
+    })
+}
+
 function newrandommapindex() {	
     var n;
 	do {
@@ -32,20 +47,34 @@ function getRandomMapName() {
 
 function loadRandomMap() {
     console.log(newrandommapindex());    
-    loadMap(getRandomMapName());	
+    loadMap(getRandomMapName(), (typeof mypool.get(name).variations !=='undefined')?resolveRandomizedVariationName(mypool.get(name)):'');	
 }
 
-function loadMap(name) {
-    if (mypool.has(name)) {
+function resolveRandomizedVariationName(map) {
+    if (typeof map.variations === 'undefined') {
+        return '';
+    }
+    let keys = Array.from(collection.keys());
+    keys.push(false); //cheat to add original variation
+    let key= keys[Math.floor(Math.random() * keys.length)];
+    if (key===false) {
+        return '';
+    }
+    return key;
+}
+
+function loadMap(name, variation = '') {
+    if (mypool.has(name)
+     && (variation=='' || (typeof mypool.get(name).variations != 'undefined' && mypool.get(name).variations.has(variation)))) {
         currState = GAME_RUNNING_STATE;
-        map = mypool.get(name);
+        const map = (variation!=='')?mypool.get(name).variations.get(variation):mypool.get(name);
         if (map.palette!= currPalette) {
             loadPalette(map.palette);
         }
-        window.WLROOM.loadPNGLevel(name, map.data);
+        window.WLROOM.loadPNGLevel(map.name, map.data);
     } else {
-        notifyAdmins("trying to load invalid map name "+name);
-        notifyAdmins("available maps: "+JSON.stringify(mypoolnames));
+        notifyAdmins("trying to load invalid map name "+name+((variation!='')?" with variation: "+variation:""));
+        notifyAdmins("available maps: "+JSON.stringify(Array.from(mypoolnames)));
     }
 }
 

@@ -1,21 +1,43 @@
 var adminCommands = {
-    map: function (p, mapname, next = false) 
+    map: function (p, mapname) 
     {   
-        if (next== false) {
-            if (mapname[0]=="random") {
+        const name = mapname[0];
+        
+        if (name=="random") {
+            loadRandomMap();
+            return;
+        }
+        /*
+            if (mapname[0]=="db") {
                 loadRandomMap();
                 return;
-            }           
-            loadMap(mapname[0]);
-            return;
-        } else {
-            if (mapname=="random") {
-                mapname=getRandomMapName();
+            } 
+            if (mapname[0]=="pool") {
+                loadRandomMap();
+                return;
             }
-            announce("the map "+mapname+" has been queued to be played at the end of this match")
-            executeOnNext.add(function(){this.map(p, mapname);})
-        }
-           
+            if (mapname[0]=="rng") {
+                loadRandomMap();
+                return;
+            }
+            if (mapname[0]=="rngdb") {
+                loadRandomMap();
+                return;
+            }              
+            
+        */
+    
+       const variation = (mapname.length>1)?mapname[1]:'';
+       loadMap(name, variation);
+    },
+    pal: function (p, modname)
+    {
+
+    },
+    next: function (p, params)
+    {
+        executeOnNext.add({"params":params, "player":p});
+        announce("your command has been queued to be launched after the end of current match");
     }
 };
 
