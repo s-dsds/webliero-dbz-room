@@ -49,11 +49,11 @@ window.WLROOM.onGameEnd2 = function() {
 
 window.WLROOM.onPlayerTeamChange = function() {
 	var act = hasActivePlayers();
-	console.log(arguments);
+	console.log(JSON.stringify(arguments));
 	console.log(act);
-	console.log(state);
-	console.log(state==SPLASH_STATE);
-    if (state==SPLASH_STATE && act) {
+	console.log(currState);
+	console.log(currState==SPLASH_STATE);
+    if (currState==SPLASH_STATE && act) {
         loadRandomMap();
     }
 }
