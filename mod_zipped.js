@@ -3797,4 +3797,6 @@ mdzip.file('mod.json5',`{
     crossHairSprite: 153
   }`);
 
-  mdzip.generateAsync({type:"arraybuffer"}).then((f)=>loadMod(f));
+mdzip.file('sprites.wlsprt', dsprites, {binary:true});
+loadMod(mdzip.generate({type:"arraybuffer"}));
+  
