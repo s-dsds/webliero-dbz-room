@@ -88,7 +88,7 @@ var splashAnimId;
 function loadSplash() {
     currState = SPLASH_STATE;
     var idx = 0;
-    const length = splashAnim.length;
+    const spllength = splashAnim.length;
     var fpsInterval = 1000 / 2;
     var then = Date.now();
     var startTime = then;
@@ -109,7 +109,8 @@ function loadSplash() {
             then = now - (elapsed % fpsInterval);
             
             window.WLROOM.loadPNGLevel("splashframe"+idx, splashAnim[idx]);            
-            idx = idx<=length?idx++:0;
+            idx = idx<=spllength?idx++:0;
+            console.log(idx);
         }
         
     }
