@@ -67,6 +67,7 @@ function resolveRandomizedVariationName(map) {
 }
 
 function loadMap(name, variation = '') {
+    stopSplash();
     console.log("name "+name, "var "+variation);
     if (mypool.has(name)
      && (variation=='' || (typeof mypool.get(name).variations != 'undefined' && mypool.get(name).variations.has(variation)))) {
@@ -82,10 +83,25 @@ function loadMap(name, variation = '') {
     }
 }
 
+var splashAnimId;
+
 function loadSplash() {
     currState = SPLASH_STATE;
-    window.WLROOM.loadPNGLevel("splash.png", splashPNG);
+    let idx = 0;
+    const length = splashAnim.length;
+    var draw = function() {
+        window.WLROOM.loadPNGLevel("splashframe"+idx, splashAnim[idx]);
+        idx = idx>=length?idx++:0;
+    };
+    splashAnimId = requestAnimationFrame(draw);  
 }
+
+function stopSplash() {
+    if (currState == SPLASH_STATE) {
+        cancelAnimationFrame(splashAnimId);
+    }
+}
+
 
 
 function _base64ToArrayBuffer(base64) {
