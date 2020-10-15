@@ -24,8 +24,8 @@ window.WLROOM.onPlayerChat = function (p, m) {
 	console.log(p.name+" "+m);
 	if (m[0] == "!") {
 		let splitted=m.substr(1).split(' ');
-		if ((p.admin && adminCommand(p, splitted)) 
-				||	(voteCommands(p, splitted))) {
+		if ((p.admin && command(adminCommands, p, splitted)) 
+				||	(command(voteCommands, p, splitted))) {
 			return false;
 		}
 	}
@@ -58,7 +58,7 @@ window.WLROOM.onPlayerTeamChange = function() {
     }
 }
 function announce(msg, player, color, style) {
-	window.WLROOM.sendAnnouncement(msg, player.id, color!=null?color:25, style !=null?style:"", 1);
+	window.WLROOM.sendAnnouncement(msg, player.id, color!=null?color:parseInt("0xb2f1d3"), style !=null?style:"", 1);
 }
 function notifyAdmins(msg, logNotif = false) {
 	getAdmins().forEach((a) => { window.WLROOM.sendAnnouncement(msg, a.id); });
@@ -72,9 +72,9 @@ function getAdmins() {
 }
 
 
-function adminCommand(p, commandText) {
-	console.log(`Admin Command: ${commandText.join(" ")}`);
-	const command = adminCommands[commandText[0]];
+function command(commands, p, commandText) {
+	console.log(`Command: ${commandText.join(" ")}`);
+	const command = commands[commandText[0]];
 	if (command == null) {
 		console.log(`Unrecognized command: ${commandText[0]}`, p.id);
 		return false;

@@ -46,28 +46,32 @@ function getRandomMapName() {
 }
 
 function loadRandomMap() {
-    console.log(newrandommapindex());    
-    loadMap(getRandomMapName(), (typeof mypool.get(name).variations !=='undefined')?resolveRandomizedVariationName(mypool.get(name)):'');	
+    const name = getRandomMapName();
+    console.log("undeftest",typeof mypool.get(name).variations !=='undefined');    
+    loadMap(name, (typeof mypool.get(name).variations !=='undefined')?resolveRandomizedVariationName(mypool.get(name)):'');	
 }
 
 function resolveRandomizedVariationName(map) {
     if (typeof map.variations === 'undefined') {
         return '';
     }
-    let keys = Array.from(collection.keys());
-    keys.push(false); //cheat to add original variation
-    let key= keys[Math.floor(Math.random() * keys.length)];
-    if (key===false) {
+    let keys = Array.from(map.variations.keys());
+    keys.push("false"); //cheat to add original variation
+    console.log(keys);
+    const kkey = Math.floor(Math.random() * keys.length);
+    let key= keys[kkey];
+    if (key==="false") {
         return '';
     }
     return key;
 }
 
 function loadMap(name, variation = '') {
+    console.log("name "+name, "var"+variation);
     if (mypool.has(name)
      && (variation=='' || (typeof mypool.get(name).variations != 'undefined' && mypool.get(name).variations.has(variation)))) {
         currState = GAME_RUNNING_STATE;
-        const map = (variation!=='')?mypool.get(name).variations.get(variation):mypool.get(name);
+        const map = (variation!='' && typeof mypool.get(name).variations != 'undefined')?mypool.get(name).variations.get(variation):mypool.get(name);
         if (map.palette!= currPalette) {
             loadPalette(map.palette);
         }
