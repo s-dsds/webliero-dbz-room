@@ -89,11 +89,32 @@ function loadSplash() {
     currState = SPLASH_STATE;
     let idx = 0;
     const length = splashAnim.length;
+    var fpsInterval = 1000 / 2;
+    var then = Date.now();
+    var startTime = then;
+    var now, elapsed;
+
+    console.log('splash animation starts'+startTime);
+
+
     var draw = function() {
         window.WLROOM.loadPNGLevel("splashframe"+idx, splashAnim[idx]);
-        idx = idx>=length?idx++:0;
+
+        now = Date.now();
+        elapsed = now - then;
+    
+        // if enough time has elapsed, draw the next frame
+    
+        if (elapsed > fpsInterval) {
+            then = now - (elapsed % fpsInterval);
+            idx = idx>=length?idx++:0;
+  
+            splashAnimId = requestAnimationFrame(draw);  
+        }
+        
     };
     loadPalette('splash');
+
     splashAnimId = requestAnimationFrame(draw);  
 }
 
