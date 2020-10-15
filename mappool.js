@@ -110,7 +110,7 @@ function loadSplash() {
             
             window.WLROOM.loadPNGLevel("splashframe"+idx, splashAnim[idx]);            
             idx = idx<=spllength?idx++:0;
-            console.log(idx);
+            console.log(idx, spllength);
         }
         
     }
