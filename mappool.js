@@ -93,6 +93,7 @@ function loadSplash() {
         window.WLROOM.loadPNGLevel("splashframe"+idx, splashAnim[idx]);
         idx = idx>=length?idx++:0;
     };
+    loadPalette('splash');
     splashAnimId = requestAnimationFrame(draw);  
 }
 
