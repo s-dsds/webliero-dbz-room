@@ -67,7 +67,7 @@ function resolveRandomizedVariationName(map) {
 }
 
 function loadMap(name, variation = '') {
-    console.log("name "+name, "var"+variation);
+    console.log("name "+name, "var "+variation);
     if (mypool.has(name)
      && (variation=='' || (typeof mypool.get(name).variations != 'undefined' && mypool.get(name).variations.has(variation)))) {
         currState = GAME_RUNNING_STATE;
