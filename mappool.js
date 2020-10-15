@@ -87,7 +87,7 @@ var splashAnimId;
 
 function loadSplash() {
     currState = SPLASH_STATE;
-    let idx = 0;
+    var idx = 0;
     const length = splashAnim.length;
     var fpsInterval = 1000 / 2;
     var then = Date.now();
@@ -97,9 +97,9 @@ function loadSplash() {
     console.log('splash animation starts'+startTime);
 
 
-    var draw = function() {
-        window.WLROOM.loadPNGLevel("splashframe"+idx, splashAnim[idx]);
-
+    function draw() {
+        
+        splashAnimId = requestAnimationFrame(draw);  
         now = Date.now();
         elapsed = now - then;
     
@@ -107,19 +107,22 @@ function loadSplash() {
     
         if (elapsed > fpsInterval) {
             then = now - (elapsed % fpsInterval);
-            idx = idx>=length?idx++:0;
-  
-            splashAnimId = requestAnimationFrame(draw);  
+            
+            window.WLROOM.loadPNGLevel("splashframe"+idx, splashAnim[idx]);            
+            idx = idx<=length?idx++:0;
         }
         
-    };
+    }
+
     loadPalette('splash');
 
-    splashAnimId = requestAnimationFrame(draw);  
+    draw();
 }
 
 function stopSplash() {
+    console.log('stp');
     if (currState == SPLASH_STATE) {
+        console.log('stop');
         cancelAnimationFrame(splashAnimId);
     }
 }

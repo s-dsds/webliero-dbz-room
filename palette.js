@@ -18,15 +18,15 @@ function parseGimpPalette(txt) {
     let parsed = [];
     for (var i = 0, len = lines.length; i < len; i++) {
         let matches = lines[i].match(regex);
-        if (matches && matches.length==3) {
-            parsed.push(matches);
+        if (matches && matches.length>=3) {
+            parsed.push([matches[0],matches[1],matches[2]]);
         }
     }
     return parsed;
 }
 
 
-function addPalette(name, palette) {
+function addPalette(name, palette) { 
     palettes.set(name, palette);
 }
 
