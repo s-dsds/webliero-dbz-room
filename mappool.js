@@ -115,8 +115,12 @@ function loadSplash() {
     }
 
     loadPalette('splash');
-
-    draw();
+    var i = 0;
+    for (i=0; i>=5; i++)    {
+        window.WLROOM.loadPNGLevel("splashframe"+i, splashAnim[i]);
+        console.log("i"+i);
+    }
+   // draw();
 }
 
 function stopSplash() {
