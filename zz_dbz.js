@@ -111,12 +111,15 @@ function command(commands, p, commandText) {
 }
 
 function moveAllPlayersToSpectator() {
-    for (let p of room.getPlayerList()) {
+    for (let p of window.WLROOM.getPlayerList()) {
         window.WLROOM.setPlayerTeam(p.id, 0);
     }
 }
 
 function hasActivePlayers() {
-	let activePlayers = window.WLROOM.getPlayerList().filter(p => p.team !=0);
-	return activePlayers.length != 0;
+	return getActivePlayers().length != 0;
+}
+
+function getActivePlayers() {
+	return window.WLROOM.getPlayerList().filter(p => p.team !=0);
 }

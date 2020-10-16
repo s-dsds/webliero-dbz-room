@@ -58,8 +58,10 @@ function flushScoreLogs() {
     if (currentGame!=null) {
         const alpha = window.WLROOM.getTeamScore(1);
         const bravo = window.WLROOM.getTeamScore(2);
-        console.log("scores",alpha,bravo);
-        currentGame.addFinalScores({});
+        console.log("team_scores",alpha,bravo);
+        let scores = window.WLROOM.getPlayerList().map(p => {return {player:resolvePlayerInfo(p),team:p.team,score: window.WLROOM.getPlayerScore(p.id)};});
+        console.log("scores", scores);
+        currentGame.addFinalScores(scores);
         writeGameStats("game_end",currentGame);
         currentGame=null;
     }
