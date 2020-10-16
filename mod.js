@@ -1,3 +1,6 @@
+var mods = new Map();
+var currMod = "v2.0.0";
+
 function loadMod(mod) {
     console.log("loading mod");
     window.WLROOM.loadMod(mod);
@@ -10,4 +13,27 @@ function makeModZip(basemod, sprites) {
 
     mdzip.file('sprites.wlsprt', sprites, {binary:true});
     return mdzip.generate({type:"arraybuffer"});
+}
+
+function stripLeds(modstring) {
+    let mod = JSON.parse(modstring);
+    mod.colorAnim = [];
+    return JSON.stringify(mod);
+}
+
+function addMod(version, json) {
+    mods.set(version, {
+            version: version,
+            json: data,
+    });
+    
+    mods.set(version+"-splash", {
+        version: version+"-splash",
+        json: data,
+    });
+    
+}
+
+function getCurrentMod(splash = false) {
+    return mods.get(currMod+(splash?"-splash":""));
 }

@@ -1,5 +1,7 @@
 var fdb;
 var commentsRef;
+var notifsRef;
+var modsRef;
 
 function initFirebase() {
     async function load_scripts(script_urls) {
@@ -35,62 +37,36 @@ function initFirebase() {
 		firebase.initializeApp(CONFIG.firebase);
 		fdb = firebase.database();
 		commentsRef = fdb.ref('dbz/comments');
-		notifsRef = fdb.ref('dbz/notifs');
+    notifsRef = fdb.ref('dbz/notifs');
+    modsRef = fdb.ref('dbz/mods');
 		console.log('firebase ok');
-		//loadExistingUsers();
-		//listenForUserEvents();
+		loadExistingMods();
+		listenForModsEvents();
 	})();		
 }
 
-/**
-function listenForUserEvents() {
-	var ur = fdb.ref('dbz/users/');
-	ur.on('child_added', addUsersToSubscribed);
 
-	ur.on('child_changed', addUsersToSubscribed);
-
-	ur.on('child_removed', function(childSnapshot) {
-	  subscribedPlayers.delete(childSnapshot.key)
-	});
+function listenForModsEvents() {
+	modsRef.on('child_added', addNewMod);
 }
 
-function addUsersToSubscribed(childSnapshot) {
+function addNewMod(childSnapshot) {
 	var v = childSnapshot.val();
 	var k = childSnapshot.key;
-	if (subscribedPlayers.has(k)) {
-		var ex = subscribedPlayers.get(childSnapshot.key);
-		ex.name = v.name;
-        ex.position = v.position;
-        ex.shortname = v.shortname!=undefined?v.shortname:"";
-		subscribedPlayers.set(childSnapshot.key, ex);
-	} else {
-        subscribedPlayers.set(childSnapshot.key, {
-             "name": v.name,
-             "position": v.position,
-             "shortname": v.shortname!=undefined?v.shortname:"" 
-            }); 
-	}
+
+  addMod(k,v.json);
+  currMod = k;
+  notifyAdmins("mod version `"+k+"`has been added to memory");
 }
 
-function loadExistingUsers() {
-    fdb.ref('dbz/users/').orderByChild('position').once('value', function(snapshot) {
-        snapshot.forEach(addUsersToSubscribed);
+function loadExistingMods() {
+    modsRef.orderByKey().once('value', function(snapshot) {
+        snapshot.forEach(addNewMod);
       });
-      ;
+      
 }
 
-function writeUser(auth, name) {
-  fdb.ref('dbz/users/' + auth).set({
-    name: name,
-	position: subscribedPlayers.size-1
-  });
-}
-
-function deleteUser(auth) {
-  fdb.ref('dbz/users/' + auth).remove();
-}
- */
 
 function writeLog(p, msg) {
- //  commentsRef.push({name: p.name, auth:auth.get(p.id), msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
+   commentsRef.push({name: p.name, auth:auth.get(p.id), msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
 }

@@ -1,4 +1,4 @@
-var base_mod = `{
+addMod("v2.0.0",`{
     soundpack: "promode.zip",
     constants: {
       nrInitialLength: 250,
@@ -3793,4 +3793,4 @@ var base_mod = `{
     ],
     textSpritesStartIdx: 240,
     crossHairSprite: 153
-  }`; 
+  }`); 

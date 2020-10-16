@@ -63,7 +63,7 @@ function announce(msg, player, color, style) {
 function notifyAdmins(msg, logNotif = false) {
 	getAdmins().forEach((a) => { window.WLROOM.sendAnnouncement(msg, a.id); });
 	if (logNotif) {
-		// notifsRef.push({msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
+		notifsRef.push({msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
 	}
 }
 

@@ -88,12 +88,14 @@ var splashAnimId;
 function loadSplash() {
     currState = SPLASH_STATE;
     var splidx = 0;
-    const maxframe = splashAnim.length-1;
-    var fpsInterval = 1000 / 2;
+    const animorder = [0,1,2,3,4,5,4,3,2,1];
+    const maxframe = animorder.length-1;
+    var fpsInterval = 1000 / 10;
     var then = Date.now();
     var startTime = then;
     var now, elapsed;
-
+    var playedThru = false;
+    
     console.log('splash animation starts'+startTime);
 
 
@@ -104,13 +106,18 @@ function loadSplash() {
         elapsed = now - then;
     
         // if enough time has elapsed, draw the next frame
-    
-        if (elapsed > fpsInterval) {
+        
+        if (elapsed > fpsInterval && (!playedThru || Math.floor(Math.random() * 500)%500==0)) {
             then = now - (elapsed % fpsInterval);
             
-            window.WLROOM.loadPNGLevel("splashframe"+splidx, splashAnim[splidx]);            
-            splidx = splidx<maxframe?splidx+1:0;
-            console.log("idx"+splidx);
+            window.WLROOM.loadPNGLevel("splashframe"+splidx, splashAnim[animorder[splidx]]);
+            if (splidx<maxframe) {
+                splidx++;
+                playedThru = false;
+            } else {
+                splidx = 0;
+                playedThru = true;
+            }
         }
         
     }
@@ -121,10 +128,7 @@ function loadSplash() {
 
 function stopSplash() {
     console.log('stp');
-    if (currState == SPLASH_STATE) {
-        console.log('stop');
-        cancelAnimationFrame(splashAnimId);
-    }
+    cancelAnimationFrame(splashAnimId);
 }
 
 
