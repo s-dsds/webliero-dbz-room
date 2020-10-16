@@ -29,7 +29,7 @@ function addMod(version, json) {
 
     mods.set(version+"-splash", {
         version: version+"-splash",
-        json: data,
+        json: json,
     });
     
 }
