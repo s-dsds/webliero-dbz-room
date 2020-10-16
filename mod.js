@@ -16,7 +16,7 @@ function makeModZip(basemod, sprites) {
 }
 
 function stripLeds(modstring) {
-    let mod = JSON.parse(modstring);
+    let mod = JSON5.parse(modstring);
     mod.colorAnim = [];
     return JSON.stringify(mod);
 }
