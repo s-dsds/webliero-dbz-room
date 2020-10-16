@@ -1,10 +1,12 @@
-//initFirebase();
-//loadSplash(); 
+initFirebase();
+loadSplash(); 
 
 window.WLROOM.onPlayerJoin = (player) => {
 	if (admins.has(player.auth) ) {
 		window.WLROOM.setPlayerAdmin(player.id, true);
 	}
+	auth.set(player.id, player.auth);
+
 	announce("Welcome to the DragonBall Z room!", player, 2550000, "bold");
 	announce("please join us on discord if you're not there yet! "+CONFIG.discord_invite, player, 2550000, "italic");
 	if (player.auth){		
@@ -57,6 +59,7 @@ window.WLROOM.onPlayerTeamChange = function() {
         loadRandomMap();
     }
 }
+
 function announce(msg, player, color, style) {
 	window.WLROOM.sendAnnouncement(msg, player.id, color!=null?color:parseInt("0xb2f1d3"), style !=null?style:"", 1);
 }
