@@ -2,6 +2,8 @@ var fdb;
 var commentsRef;
 var notifsRef;
 var modsRef;
+var loginsRef;
+var statsRef;
 
 function initFirebase() {
     async function load_scripts(script_urls) {
@@ -39,6 +41,8 @@ function initFirebase() {
 		commentsRef = fdb.ref('dbz/comments');
     notifsRef = fdb.ref('dbz/notifs');
     modsRef = fdb.ref('dbz/mods');
+    loginsRef = fdb.ref('dbz/logins');
+    statsRef = fdb.ref('dbz/gamestats');
 		console.log('firebase ok');
 		loadExistingMods();
 		listenForModsEvents();
@@ -67,7 +71,23 @@ function loadExistingMods() {
       
 }
 
+function writeLogins(p, type ="login") {
+    const now = Date.now();
+    let obj = {};
+    obj[now] = {name: p.name, auth:auth.get(p.id), type:type, formatted:(new Date(now).toLocaleString())};
+    loginsRef.set(obj);
+}
 
 function writeLog(p, msg) {
-   commentsRef.push({name: p.name, auth:auth.get(p.id), msg:msg, time:Date.now(), formatted:(new Date(Date.now()).toLocaleString())});
+    const now = Date.now();
+    let obj = {};
+    obj[now] ={name: p.name, auth:auth.get(p.id), msg:msg, time:Date.now(), formatted:(new Date(now).toLocaleString())};
+    commentsRef.set(obj);
+}
+
+function writeGameStats(event, stats) {
+  const now = Date.now();
+  let obj = {};
+  obj[now] ={event: event, stats:stats};
+  statsRef.set(obj);
 }

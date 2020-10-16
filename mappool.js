@@ -100,7 +100,10 @@ function loadSplash() {
 
 
     function draw() {
-        
+        if (!isSplash()) {
+            stopSplash();
+            return;
+        }
         splashAnimId = requestAnimationFrame(draw);  
         now = Date.now();
         elapsed = now - then;
@@ -130,8 +133,6 @@ function stopSplash() {
     console.log('stp');
     cancelAnimationFrame(splashAnimId);
 }
-
-
 
 function _base64ToArrayBuffer(base64) {
     var binary_string = window.atob(base64);
