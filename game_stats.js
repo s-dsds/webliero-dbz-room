@@ -25,7 +25,7 @@ class Game {
             this.playerEvents.push({event_time:Date.now(), event:"join_game", to:to, player:resolvePlayerInfo(player)});
             return;
         }
-        this.playerEvents.push({event_time:Date.now(), event:"team_change", from:from, to:to, resolvePlayerInfo(player)});
+        this.playerEvents.push({event_time:Date.now(), event:"team_change", from:from, to:to, player:resolvePlayerInfo(player)});
       }
       addFinalScores(scores) {
         this.finalScores = scores;
