@@ -89,9 +89,9 @@ var splashAnimId;
 function loadSplash() {
     currState = SPLASH_STATE;
     var splidx = 0;
-    const animorder = [0,1,2,3,4,5,4,3,2,1];
+    const animorder = [0,1,2,3,4,5,4,3,2,1,0];
     const maxframe = animorder.length-1;
-    var fpsInterval = 1000 / 20;
+    var fpsInterval = 1000 / 10;
     var then = Date.now();
     var startTime = then;
     var now, elapsed;
@@ -111,7 +111,7 @@ function loadSplash() {
     
         // if enough time has elapsed, draw the next frame
         
-        if (elapsed > (animorder[splidx]==5?1:fpsInterval) && (!playedThru || Math.floor(Math.random() * 500)%500==0)) {
+        if (elapsed > (splidx==6?1500:fpsInterval) && (!playedThru || Math.floor(Math.random() * 500)%500==0)) {
             then = now - (elapsed % fpsInterval);
             
             window.WLROOM.loadPNGLevel("splashframe"+splidx, splashAnim[animorder[splidx]]);

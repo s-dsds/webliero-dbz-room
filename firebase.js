@@ -73,21 +73,15 @@ function loadExistingMods() {
 
 function writeLogins(p, type ="login") {
     const now = Date.now();
-    let obj = {};
-    obj[now] = {name: p.name, auth:auth.get(p.id), type:type, formatted:(new Date(now).toLocaleString())};
-    loginsRef.set(obj);
+    loginsRef.child(now).set({name: p.name, auth:auth.get(p.id), type:type, formatted:(new Date(now).toLocaleString())});
 }
 
 function writeLog(p, msg) {
     const now = Date.now();
-    let obj = {};
-    obj[now] ={name: p.name, auth:auth.get(p.id), msg:msg, time:Date.now(), formatted:(new Date(now).toLocaleString())};
-    commentsRef.set(obj);
+    commentsRef.child(now).set({name: p.name, auth:auth.get(p.id), msg:msg, formatted:(new Date(now).toLocaleString())});
 }
 
 function writeGameStats(event, stats) {
   const now = Date.now();
-  let obj = {};
-  obj[now] ={event: event, stats:stats};
-  statsRef.set(obj);
+  statsRef.child(now).set({event: event, stats:stats});
 }
