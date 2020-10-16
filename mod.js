@@ -24,9 +24,9 @@ function stripLeds(modstring) {
 function addMod(version, json) {
     mods.set(version, {
             version: version,
-            json: data,
+            json: json,
     });
-    
+
     mods.set(version+"-splash", {
         version: version+"-splash",
         json: data,
