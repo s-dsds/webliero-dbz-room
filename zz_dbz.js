@@ -7,7 +7,7 @@ window.WLROOM.onPlayerJoin = (player) => {
 	}
 	auth.set(player.id, player.auth);
 
-	announce("Welcome to the DragonBall Z room!", player, 2550000, "bold");
+	announce("Welcome to the WebLiero Z room!", player, 2550000, "bold");
 	announce("please join us on discord if you're not there yet! "+CONFIG.discord_invite, player, 2550000, "italic");
 	if (player.auth){		
 		auth.set(player.id, player.auth);
