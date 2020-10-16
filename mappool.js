@@ -111,7 +111,7 @@ function loadSplash() {
     
         // if enough time has elapsed, draw the next frame
         
-        if (elapsed > (splidx==5?5:fpsInterval) && (!playedThru || Math.floor(Math.random() * 500)%500==0)) {
+        if (elapsed > (animorder[splidx]==5?1:fpsInterval) && (!playedThru || Math.floor(Math.random() * 500)%500==0)) {
             then = now - (elapsed % fpsInterval);
             
             window.WLROOM.loadPNGLevel("splashframe"+splidx, splashAnim[animorder[splidx]]);
