@@ -51,7 +51,7 @@ function addPlayerTeamChange(player, from, to) {
 }
 
 function startScoreLogs() {
-    currentGame = new Game();
+    currentGame = new Game(Date.now(), window.WLROOM.getPlayerList());
 }
 
 function flushScoreLogs() {
