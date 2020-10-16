@@ -27,7 +27,7 @@ function flushScoreLogs() {
         const alpha = window.WLROOM.getTeamScore(1);
         const bravo = window.WLROOM.getTeamScore(2);
         console.log("scores",alpha,bravo);
-        currentGame.addFinalScores({})
+        currentGame.addFinalScores({});
         writeGameStats("game_end",currentGame);
         currentGame=null;
     }
