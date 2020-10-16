@@ -56,6 +56,7 @@ function addNewMod(childSnapshot) {
 
   addMod(k,v.json);
   currMod = k;
+  console.log("mod version `"+k+"`has been added to memory");
   notifyAdmins("mod version `"+k+"`has been added to memory");
 }
 

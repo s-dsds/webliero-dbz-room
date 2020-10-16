@@ -12,7 +12,7 @@ var commands;
 	console.log("Running Server...");
 	var room = WLInit({
 		token: window.WLTOKEN,
-		roomName: "DragonBall Z",
+		roomName: "DragonBall Z [Beta]",
 		maxPlayers: 12,	
 		public: CONFIG.public
 	});

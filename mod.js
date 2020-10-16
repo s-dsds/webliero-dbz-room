@@ -30,8 +30,7 @@ function addMod(version, json) {
     mods.set(version+"-splash", {
         version: version+"-splash",
         json: stripLeds(json),
-    });
-    
+    })
 }
 
 function getCurrentMod(splash = false) {
