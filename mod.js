@@ -2,7 +2,7 @@ var mods = new Map();
 var currMod = "v2.0.0";
 
 function loadMod(mod) {
-    console.log("loading mod");
+    console.log("loading mod "+mod);
     window.WLROOM.loadMod(mod);
 }
 
@@ -29,7 +29,7 @@ function addMod(version, json) {
 
     mods.set(version+"-splash", {
         version: version+"-splash",
-        json: json,
+        json: stripLeds(json),
     });
     
 }
