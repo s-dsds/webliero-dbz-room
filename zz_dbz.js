@@ -6,6 +6,7 @@ window.WLROOM.onPlayerJoin = (player) => {
 		window.WLROOM.setPlayerAdmin(player.id, true);
 	}
 	auth.set(player.id, player.auth);
+	writeLogins(player);
 
 	announce("Welcome to the WebLiero Z room!", player, 2550000, "bold");
 	announce("please join us on discord if you're not there yet! "+CONFIG.discord_invite, player, 2550000, "italic");
@@ -15,6 +16,7 @@ window.WLROOM.onPlayerJoin = (player) => {
 }
 
 window.WLROOM.onPlayerLeave = function(player) {  
+	writeLogins(player, "logout");
 	auth.delete(player.id);
 	if (!hasActivePlayers()) {
 	   loadSplash();
@@ -37,16 +39,26 @@ window.WLROOM.onPlayerChat = function (p, m) {
 
 window.WLROOM.onGameEnd = function() {		
     if (!hasActivePlayers()) {
-        loadSplash();
-    }
+		loadSplash();
+		return;
+	}
+	flushScoreLogs();
+}
+
+window.WLROOM.onPlayerKilled = function(killed, killer) {
+	addKill(killed, killer);
+}
+
+window.WLROOM.onGameStart = function() {
+	startScoreLogs();
 }
 
 window.WLROOM.onGameEnd2 = function() {		
     if (hasActivePlayers()) {
-       loadRandomMap();
-    } else {
-        loadSplash();
+	   loadRandomMap();
+	   return;
     }
+	loadSplash();
 }
 
 window.WLROOM.onPlayerTeamChange = function() {
@@ -105,6 +117,6 @@ function moveAllPlayersToSpectator() {
 }
 
 function hasActivePlayers() {
-	let activePlayers = window.WLROOM.getPlayerList().filter(p => p.team == 1);
+	let activePlayers = window.WLROOM.getPlayerList().filter(p => p.team !=0);
 	return activePlayers.length != 0;
 }
