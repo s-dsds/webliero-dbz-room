@@ -210,16 +210,16 @@ Columns: 16
   0   0   0	    undefined
   0   0   0	    undefined
   0   0   0	    undefined
-  146 129 174	#0 undef inv 	#0 dirt
-  144 135 177	#1 undef inv 	#1 dirt
-  150 140 183	#2 undef inv 	#2 dirt
-  156 147 190	#3 undef inv 	#3 dirt
-  163 153 196	#4 undef inv 	#4 dirt
-  168 158 201	#5 undef inv 	#5 dirt
-  165 163 204	#6 undef inv 	#6 dirt
-  171 167 210	#7 undef inv 	#7 dirt
-  176 173 215	#8 undef inv 	#8 dirt
   182 179 222	#9 undef inv 	#9 dirt
+  176 173 215	#8 undef inv 	#8 dirt
+  171 167 210	#7 undef inv 	#7 dirt
+  165 163 204	#6 undef inv 	#6 dirt
+  168 158 201	#5 undef inv 	#5 dirt
+  163 153 196	#4 undef inv 	#4 dirt
+  156 147 190	#3 undef inv 	#3 dirt
+  150 140 183	#2 undef inv 	#2 dirt
+  144 135 177	#1 undef inv 	#1 dirt
+  146 129 174	#0 undef inv 	#0 dirt
   0   0   0	    undefined
  79  11   8	#0 undef
 101   9   8	#1 undef
