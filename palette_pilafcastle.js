@@ -208,7 +208,7 @@ Columns: 16
   0   0   0	    undefined
   0   0   0	    undefined
   0   0   0	    undefined
-  0   0   0	    undefined
+  171 151  93    undefined => 5bg
   0   0   0	    undefined
   182 179 222	#9 undef inv 	#9 dirt
   176 173 215	#8 undef inv 	#8 dirt
