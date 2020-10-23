@@ -132,7 +132,7 @@ Columns: 16
 244 124 124	    undefined
 244 188 188	    undefined
 104 104 248	    led
-100  83  50	#0 bg-shadow !led!
+100  83  50	#0 bg-shadow led
 184 184 244	    led
 144 144 244	    undefined
  65 177  65	    undefined
@@ -196,68 +196,68 @@ Columns: 16
   0   0   0	    undefined
   0   0   0	    undefined
   0   0   0	    undefined
- 38   3  75	#1 undef
- 78  11 142	#2 undef
- 31  45  56	#3  undef
- 58  38  47	#4 undef
- 44  54  47	#5 undef
-165  20  43	#6 undef
- 65  54  50	#7 undef
- 41  73 170	#8 undef
- 57  76  95	#9 undef
- 82  74  53	#10 undef
-103  71  20	#11 undef
- 74 114  53	#12 undef
-120 108  73	#13 undef
-235  75 144	#14 undef
- 89 135  93	#15 undef
-158 115 132	#16 undef
-199 110 120	#17 undef
-151 130  89	#18 undef
-106 161  85	#19 undef
-112 153 174	#20 undef
-121 162  89	#21 undef
-126 156 165	#22 undef
-144 160  98	#23 undef
-132 164  95	#24 undef
-124 163 175	#25 undef
-198 143 175	#26 undef
-179 155 110	#27 undef
-187 167  59	#28 undef
-188 164 118	#29 undef
-201 176 127	#30 undef
-163 187 198	#31 undef
-206 186 138	#32 undef
-168 193 204	#33 undef
-239 169 232	#34 undef
-183 198 190	#35 undef
-223 190 146	#36 undef
-211 196 156	#37 undef
-236 226 237	#38 undef
-255 255 255	#39 undef
   0   0   0	    undefined
-254   2   2	    undefined
-252  36   0	    undefined
-252  72   0	    undefined
-252 108   0	    undefined
-252 144   0	    undefined
-252 180   0	    undefined
-252 216   0	    undefined
-252 252   0	    undefined
-168 240   0	    undefined
- 84 232   0	    undefined
-  0 224   0	    undefined
-252   0   0	    undefined
-232   4  20	    undefined
-216  12  44	    undefined
-196  20  68	    undefined
-180  24  88	    undefined
-160  32 112	    undefined
-144  40 136	    undefined
-124  44 156	    undefined
-108  52 180	    undefined
- 88  60 204	    undefined
- 72  68 228	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0	    undefined
+  0   0   0   uuu
+ 38   3  75	 #1 undef
+ 78  11 142	 #2 undef
+ 31  45  56	 #3  undef
+ 58  38  47	 #4 undef
+ 44  54  47	 #5 undef
+165  20  43	 #6 undef
+ 65  54  50	 #7 undef
+ 41  73 170	 #8 undef
+ 57  76  95	 #9 undef
+ 82  74  53	 #10 undef
+103  71  20	 #11 undef
+ 74 114  53	 #12 undef
+120 108  73	 #13 undef
+235  75 144	 #14 undef
+ 89 135  93	 #15 undef
+158 115 132	 #16 undef
+199 110 120	 #17 undef
+151 130  89	 #18 undef
+106 161  85	 #19 undef
+112 153 174	 #20 undef
+121 162  89	 #21 undef
+126 156 165	 #22 undef
+144 160  98	 #23 undef
+132 164  95	 #24 undef
+124 163 175	 #25 undef
+198 143 175	 #26 undef
+179 155 110	 #27 undef
+187 167  59	 #28 undef
+188 164 118	 #29 undef
+201 176 127	 #30 undef
+163 187 198	 #31 undef
+206 186 138	 #32 undef
+168 193 204	 #33 undef
+239 169 232	 #34 undef
+183 198 190	 #35 undef
+223 190 146	 #36 undef
+211 196 156	 #37 undef
+236 226 237	 #38 undef
 `;
 
 addPalette('buuh', parseGimpPalette(pt_buuh)); pt_buuh=null;
