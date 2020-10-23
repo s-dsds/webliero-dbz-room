@@ -81,7 +81,7 @@ function loadMap(name, variation = '') {
     }
     notifyAdmins("trying to load invalid map name "+name+((variation!='')?" with variation: "+variation:""));
     notifyAdmins("available maps: "+JSON.stringify(Array.from(mypoolnames)));
-    
+
 }
 
 var splashAnimId;
