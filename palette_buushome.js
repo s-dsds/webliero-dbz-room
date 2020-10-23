@@ -214,11 +214,11 @@ Columns: 16
   0   0   0	    undefined
   0   0   0	    undefined
   0   0   0	    undefined
-  0   0   0	    undefined
-  0   0   0	    undefined
-  0   0   0	    undefined
-  0   0   0	    undefined
-  0   0   0	    undefined
+  44  86  28
+  49 102  31
+   0   0   0	    undefined
+ 133 191 204
+ 174 204 212
   0   0   0   uuu
  38   3  75	 #1 undef
  78  11 142	 #2 undef
