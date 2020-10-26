@@ -36,7 +36,7 @@ function getPalette(name) {
 
 function loadPalette(name) {
     let sprites = loadPaletteToSprites(base_sprites, name);
-    loadMod(makeModZip(getCurrentMod(name=="splash" || name=="buuh").json, sprites));
+    loadMod(makeModZip(getCurrentMod(name=="splash" || name=="buuh" || name=="khi").json, sprites));
     currPalette = name;
 }
 
