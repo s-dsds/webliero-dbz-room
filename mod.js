@@ -1,5 +1,5 @@
 var mods = new Map();
-var currMod = "v2.0.0";
+var currMod = "v2021_05_06";
 
 function loadMod(mod) {
     console.log("loading mod "+mod);
